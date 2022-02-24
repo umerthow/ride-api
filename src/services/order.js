@@ -11,6 +11,7 @@ class Order {
    */
   async createOrder(data) {
     const { pickupTime: pickup_time, vehicleType: vehicle_type, wayPoints } = data
+
     const payload = {
       pickup_time,
       vehicle_type
@@ -30,8 +31,7 @@ class Order {
       }
     }))
 
-    const orderItems = await rdOrderItem.bulkCreate(payloadItems)
-
+    await rdOrderItem.bulkCreate(payloadItems)
     return {
       success: true,
       data: orderHeader,
