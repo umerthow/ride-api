@@ -4,7 +4,7 @@ const rdOrderItem = require('./rd_order_items')
 // Relationship
 rdOrder.hasMany(rdOrderItem, { as: 'items', foreignKey: 'order_id' });
 rdOrderItem.hasOne(rdOrder, { foreignKey: 'id' });
-rdOrderItem.hasMany(rdOrderItem, { foreignKey: 'driver_code' } )
+// rdOrderItem.hasMany(rdOrderItem, { foreignKey: 'driver_code' } )
 
 
 module.exports = {
