@@ -1,9 +1,9 @@
-const OrderInstance = require('../../src/services/order')
+const OrderInstance = require('../../../src/services/order')
 const Order = new OrderInstance()
-const { rdOrder, rdOrderItem } = require('../../src/schemas/index')
+const { rdOrder, rdOrderItem } = require('../../../src/schemas/index')
 const { expect } = require('chai')
 const sinon = require('sinon')
-const { scenario01 } = require('../scenario/orderCreate_case')
+const { scenario01 } = require('../../scenario/order/orderCreate_case')
 describe('Order Case', () => {
 
   let sandbox = null
@@ -17,8 +17,8 @@ describe('Order Case', () => {
   })
 
   afterEach(() => {
-    sandbox.restore();
-  });
+    sandbox.restore()
+  })
 
   it('Should order created', async () => {
     rdOrderStub.returns().resolves(scenario01.result)

@@ -131,13 +131,12 @@ class Order {
    * @param {Object} param
    * @returns {Promise<{ success: Boolean, data: Object, message: String}>}
    */
-  async getListOrderGroup(param) {
+  async getListOrderGroup(param = {}) {
 
     const { driverCode } = param
     let whereItems = {}
 
     const query = {}
-
 
     if (driverCode) {
       whereItems = {
