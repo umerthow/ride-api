@@ -15,8 +15,7 @@ const rdOrderItem = db.define('rd_order_item', {
   name: { type: Sequelize.STRING },
   phone: { type: Sequelize.STRING },
   notes: { type: Sequelize.TEXT },
-  is_get_driver: { type: Sequelize.SMALLINT },
-  taken_by: { type: Sequelize.STRING },
+  driver_code: { type: Sequelize.STRING },
   created_at: { type: Sequelize.DATE },
   updated_at: { type: Sequelize.DATE }
 },

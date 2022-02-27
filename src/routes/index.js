@@ -3,7 +3,9 @@ const Router = express.Router()
 const orderController = require('../controllers/orderController')
 const validator = require('../validators/formOrder')
 
-Router.post('/order',validator.create, orderController.createOrder)
-
+Router.post('/orders',validator.create, orderController.createOrder)
+Router.get('/orders', orderController.getList)
+Router.post('/orders/:id/assign-driver',validator.assigning, orderController.assignOrder)
+Router.get('/orders/group', orderController.getGroupList)
 module.exports = Router
 

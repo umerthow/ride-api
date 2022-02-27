@@ -34,6 +34,29 @@ const validateOrder = {
         message: error.message
       });
     }
+  },
+  assigning: async (req, res, next) => {
+    try {
+      const schema = Joi.object({
+        orderItemId: Joi.number().required(),
+        driverCode: Joi.string().required()
+      })
+
+      const { error } = await schema.validate(req.body)
+      
+      if (error) {
+        throw new Error(`Validation error: ${error.details.map(x => x.message).join(', ')}`)
+      }
+      next()
+
+
+    } catch (error) {
+      res.status(400).send({
+        error: true,
+        statusCode: errorCode.VALIDATION_ERROR,
+        message: error.message
+      });
+    }
   }
 }
 
