@@ -7,5 +7,6 @@ Router.post('/orders',validator.create, orderController.createOrder)
 Router.get('/orders', orderController.getList)
 Router.post('/orders/:id/assign-driver',validator.assigning, orderController.assignOrder)
 Router.get('/orders/group', orderController.getGroupList)
+Router.get('/orders/group-list', orderController.groupOrder)
 module.exports = Router
 

@@ -65,9 +65,21 @@ const getGroupList = async (req, res, next) => {
   }
 }
 
+const groupOrder = async (req, res, next) => {
+  try {
+    const { query } = req
+    const Order = new OrderInstance()
+    const result = await Order.getGroupOrderByEachDriver(query)
+    res.json(result)
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   createOrder,
   assignOrder,
   getList,
-  getGroupList
+  getGroupList,
+  groupOrder
 }

@@ -66,5 +66,68 @@ module.exports = {
         message: "success retrieve orders group"
       }
     }
+  },
+  listCase3: {
+    response: {
+      findItemAll: {
+        result: [
+          {
+            order_id: 13, 
+            driver_code: null
+          },
+          {
+            order_id: 12,
+            driver_code: 'BV5MXZ-115'
+          },
+          {
+            order_id: 10,
+            driver_code: 'BPSHF7382b' 
+          },
+        ]
+      },
+      result: {
+          success: true,
+          statusCode: 200,
+          data: [
+              {
+                  driver_code: "null",
+                  orders: [
+                      {
+                          order_id: 13,
+                          detail: [
+                              {
+                                  id: 13,
+                                  order_id: 13,
+                                  service_type: "PICK_UP",
+                                  driver_code: null,
+                                  created_at: "2022-02-27T23:44:08.000Z",
+                                  updated_at: "2022-02-27T23:44:08.000Z"
+                              }
+                            ]
+                      }
+                  ]
+              },
+              {
+                  driver_code: "BV5MXZ-125",
+                  orders: [
+                      {
+                          order_id: 12,
+                          detail: [
+                              {
+                                  id: 11,
+                                  order_id: 12,
+                                  service_type: "PICK_UP",
+                                  driver_code: "BV5MXZ-125",
+                                  created_at: "2022-02-27T02:10:59.000Z",
+                                  updated_at: "2022-02-27T02:11:41.000Z"
+                              }
+                          ]
+                      }
+                  ]
+              }
+          ],
+          message: "success retrieve orders group each driver"
+      }
+    }
   }
 };

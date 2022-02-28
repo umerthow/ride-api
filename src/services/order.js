@@ -3,6 +3,7 @@ const {
 } = require('../schemas')
 const { httpStatus } = require('../configs/constant')
 const { Op } = require('sequelize')
+const _ = require('lodash')
 
 class Order {
   /**
@@ -119,11 +120,13 @@ class Order {
    * 
    * List Orders Item by driverCode
    * @param {String} driverCode
+   * @param {number} orderId
    * @returns {Promise<Object>}
    */
-  async getItemsByDriver(driverCode) {
+  async getItemsByDriver(driverCode, orderId) {
     return await rdOrderItem.findAll({
       where: {
+        order_id: orderId,
         driver_code: driverCode
       }
     })
@@ -150,7 +153,7 @@ class Order {
       }
     }
 
-    query.attributes = ['driver_code']
+    query.attributes = ['driver_code', 'order_id']
     query.where = {
       [Op.and]: {
         driver_code: {
@@ -165,10 +168,10 @@ class Order {
     const orderGroup = await rdOrderItem.findAll(query)
 
     const adjustmentOrderGroup = orderGroup.map(async item => {
-      const { driver_code: drvCode } = item
+      const { driver_code: drvCode, order_id: orderId } = item
       return {
         driver_code: drvCode,
-        items: await this.getItemsByDriver(drvCode)
+        items: await this.getItemsByDriver(drvCode, orderId)
       }
     })
 
@@ -179,6 +182,62 @@ class Order {
       statusCode: httpStatus.ok,
       data: result,
       message: 'success retrieve orders group'
+    }
+  }
+
+
+  /**
+   * 
+   * List Orders group
+   * @param {Object} param
+   * @returns {Promise<{ success: Boolean, data: Object, message: String}>}
+   */
+  async getGroupOrderByEachDriver() {
+    const orderItems = await rdOrderItem.findAll({
+      attributes: ['order_id', 'driver_code'],
+      order: [
+        ['id', 'DESC']
+      ]
+    })
+
+
+    const dataResult = []
+
+    const groupOrder = _.groupBy(orderItems, 'driver_code')
+
+    Object.keys(groupOrder).map((val) => {
+      dataResult.push({
+        driver_code: val,
+        orders: _.uniqBy(groupOrder[val], 'order_id')
+      })
+
+      return dataResult
+    })
+
+
+    const transform = dataResult.map(async data => {
+      const { orders } = data
+
+      const adjustment = orders.map(async item => {
+        const { order_id, driver_code } = item
+        return {
+          order_id,
+          detail: await this.getItemsByDriver(driver_code, order_id)
+        }
+      })
+
+      const promiseAdju = await Promise.all(adjustment)
+      return data.orders = promiseAdju
+    })
+
+
+    await Promise.all(transform)
+
+    return {
+      success: true,
+      statusCode: httpStatus.ok,
+      data: dataResult,
+      message: 'success retrieve orders group each driver'
     }
   }
 }

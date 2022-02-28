@@ -3,7 +3,7 @@ const Order = new OrderInstance()
 const { rdOrder, rdOrderItem } = require('../../../src/schemas/index')
 const { expect } = require('chai')
 const sinon = require('sinon')
-const { listCase1, listCase2 } = require('../../scenario/order/orderList_case')
+const { listCase1, listCase2, listCase3 } = require('../../scenario/order/orderList_case')
 
 describe('Order List', () => {
   let sandbox = null
@@ -60,4 +60,15 @@ describe('Order List', () => {
     expect(driver.driver_code).to.eq(listCase2.response.result.data[0].driver_code)
   })
 
+  it('Should group order by each driver', async () => {
+    rdOrderItemStub.returns().resolves(listCase3.response.findItemAll.result)
+
+    const result = await Order.getGroupOrderByEachDriver()
+    const { data } = result
+
+    expect(data).to.be.an('array')
+    expect(result).to.haveOwnProperty('success')
+    expect(data[0]).to.haveOwnProperty('driver_code')
+    expect(data[0]).to.haveOwnProperty('orders')
+  })
 })

@@ -147,6 +147,206 @@ running..
 }
 ```
 
+#### Group Order
+- Will merges all unassigned items to the same group driver code
+- GET `/orders/group-list`
+- response
+```
+{
+    "success": true,
+    "statusCode": 200,
+    "data": [
+        {
+            "driver_code": "null",
+            "orders": [
+                {
+                    "order_id": 13,
+                    "detail": [
+                        {
+                            "id": 13,
+                            "order_id": 13,
+                            "service_type": "PICK_UP",
+                            "address": "Jl FG Meruyunh ",
+                            "latitude": 123.455,
+                            "longitude": 123.455,
+                            "name": "George Will",
+                            "phone": "+629938848",
+                            "notes": " near school",
+                            "driver_code": null,
+                            "created_at": "2022-02-27T23:44:08.000Z",
+                            "updated_at": "2022-02-27T23:44:08.000Z"
+                        },
+                        {
+                            "id": 14,
+                            "order_id": 13,
+                            "service_type": "PICK_UP",
+                            "address": "Jl AC Meruyunh ",
+                            "latitude": 123.455,
+                            "longitude": 123.455,
+                            "name": "George Will",
+                            "phone": "+629938848",
+                            "notes": " near school",
+                            "driver_code": null,
+                            "created_at": "2022-02-27T23:44:08.000Z",
+                            "updated_at": "2022-02-27T23:44:08.000Z"
+                        }
+                    ]
+                },
+                {
+                    "order_id": 12,
+                    "detail": [
+                        {
+                            "id": 12,
+                            "order_id": 12,
+                            "service_type": "PICK_UP",
+                            "address": "Jl AC Meruyunh ",
+                            "latitude": 123.455,
+                            "longitude": 123.455,
+                            "name": "George Will",
+                            "phone": "+629938848",
+                            "notes": " near school",
+                            "driver_code": null,
+                            "created_at": "2022-02-27T02:10:59.000Z",
+                            "updated_at": "2022-02-27T02:10:59.000Z"
+                        }
+                    ]
+                },
+                {
+                    "order_id": 11,
+                    "detail": [
+                        {
+                            "id": 10,
+                            "order_id": 11,
+                            "service_type": "PICK_UP",
+                            "address": "Jl Widi Meruyunh ",
+                            "latitude": 123.455,
+                            "longitude": 123.455,
+                            "name": "George Will",
+                            "phone": "+629938848",
+                            "notes": " near school",
+                            "driver_code": null,
+                            "created_at": "2022-02-27T02:03:34.000Z",
+                            "updated_at": "2022-02-27T02:03:34.000Z"
+                        }
+                    ]
+                },
+                {
+                    "order_id": 9,
+                    "detail": [
+                        {
+                            "id": 8,
+                            "order_id": 9,
+                            "service_type": "PICK_UP",
+                            "address": "Jl Brawijaya IV",
+                            "latitude": 123.455,
+                            "longitude": 123.455,
+                            "name": "George Will",
+                            "phone": "+629938848",
+                            "notes": " number 1 beside school",
+                            "driver_code": null,
+                            "created_at": "2022-02-27T02:03:00.000Z",
+                            "updated_at": "2022-02-27T02:03:00.000Z"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "driver_code": "BV5MXZ-125",
+            "orders": [
+                {
+                    "order_id": 12,
+                    "detail": [
+                        {
+                            "id": 11,
+                            "order_id": 12,
+                            "service_type": "PICK_UP",
+                            "address": "Jl FG Meruyunh ",
+                            "latitude": 123.455,
+                            "longitude": 123.455,
+                            "name": "George Will",
+                            "phone": "+629938848",
+                            "notes": " near school",
+                            "driver_code": "BV5MXZ-125",
+                            "created_at": "2022-02-27T02:10:59.000Z",
+                            "updated_at": "2022-02-27T02:11:41.000Z"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "driver_code": "BVHF7382b",
+            "orders": [
+                {
+                    "order_id": 10,
+                    "detail": [
+                        {
+                            "id": 9,
+                            "order_id": 10,
+                            "service_type": "PICK_UP",
+                            "address": "Jl Andara Polig",
+                            "latitude": 123.455,
+                            "longitude": 123.455,
+                            "name": "George Will",
+                            "phone": "+629938848",
+                            "notes": " number 1 beside school",
+                            "driver_code": "BVHF7382b",
+                            "created_at": "2022-02-27T02:03:13.000Z",
+                            "updated_at": "2022-02-28T00:05:14.000Z"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "driver_code": "BV5MXZ-124",
+            "orders": [
+                {
+                    "order_id": 8,
+                    "detail": [
+                        {
+                            "id": 7,
+                            "order_id": 8,
+                            "service_type": "PICK_UP",
+                            "address": "Jl Brawijaya II",
+                            "latitude": 123.455,
+                            "longitude": 123.455,
+                            "name": "George Will",
+                            "phone": "+629938848",
+                            "notes": " number 1 beside school",
+                            "driver_code": "BV5MXZ-124",
+                            "created_at": "2022-02-27T02:02:56.000Z",
+                            "updated_at": "2022-02-27T02:11:12.000Z"
+                        }
+                    ]
+                },
+                {
+                    "order_id": 7,
+                    "detail": [
+                        {
+                            "id": 6,
+                            "order_id": 7,
+                            "service_type": "PICK_UP",
+                            "address": "Jl nanas no 1 Boyolali, Rt 1",
+                            "latitude": 123.455,
+                            "longitude": 123.455,
+                            "name": "George Will",
+                            "phone": "+629938848",
+                            "notes": " number 1 beside school",
+                            "driver_code": "BV5MXZ-124",
+                            "created_at": "2022-02-27T00:26:37.000Z",
+                            "updated_at": "2022-02-27T00:32:40.000Z"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "message": "success retrieve orders group"
+}
+```
+
 #### Group list order by each driver
 - GET `/orders/group`
 - query string: 
@@ -191,7 +391,7 @@ running..
             ]
         }
     ],
-    "message": "success retrieve orders group"
+    "message": "success retrieve orders group each driver"
 }
 ```
 
