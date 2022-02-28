@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const OrderRoutes = require('./routes')
-
+const { httpStatus } = require('../src/configs/constant')
 
 app.use(cors());
 app.use(bodyParser.json({limit: '50mb'}));
@@ -20,7 +20,7 @@ app.use('/', OrderRoutes)
 
 // falltrough 404
 app.use((req, res, next) => {
-  res.status(404)
+  res.status(httpStatus.notFound)
   res.send({
     message: 'Api not found'
   })
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 // error handler
 app.use(function onError(err, req, res, next) {
   res
-    .status(500)
+    .status(httpStatus.internalError)
     .send({
       error: true,
       message: err.message,

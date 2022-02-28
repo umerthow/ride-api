@@ -61,6 +61,15 @@ running..
 - `/test` This directory contains the unit test case for module or core function.
 
 
+## Error and Status
+#### Error Code
+-  90001: VALIDATION_ERROR
+#### Status Code
+-  200: Ok
+- 400: Bad Request
+-  404: Not Found
+- 500: Internal Error
+
 ## API Usage
 #### Create Order
 - POST `/order` 
@@ -68,6 +77,7 @@ running..
 ``` JSON
 {
     "pickupTime": "2022-02-28 22:45:00",
+    "statusCode": 200,
     "vehicleType": "BIKE",
     "wayPoints": [
         {
@@ -100,6 +110,7 @@ running..
 ```
 {
     "success": true,
+    "statusCode": 200,
     "data": {
         "id": 12,
         "pickup_time": "2022-02-28T15:45:00.000Z",
@@ -128,6 +139,7 @@ running..
 ```
 {
     "success": true,
+    "statusCode": 200,
     "data": [
         1
     ],
@@ -143,6 +155,7 @@ running..
 ```
 {
     "success": true,
+    "statusCode": 200,
     "data": [
         {
             "driver_code": "BV5MXZ-124",
@@ -188,6 +201,7 @@ running..
 ```
 {
     "success": true,
+    "statusCode": 200,
     "data": [
         {
             "id": 12,

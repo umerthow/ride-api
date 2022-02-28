@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const { errorCode } = require('../configs/constant')
+const { errorCode, httpStatus } = require('../configs/constant')
 
 const validateOrder = {
   create: async (req, res, next) => {
@@ -28,9 +28,9 @@ const validateOrder = {
       }
       next()
     } catch (error) {
-      res.status(400).send({
+      res.status(httpStatus.badRequest).send({
         error: true,
-        statusCode: errorCode.VALIDATION_ERROR,
+        errorCode: errorCode.VALIDATION_ERROR,
         message: error.message
       });
     }
@@ -39,7 +39,7 @@ const validateOrder = {
     try {
       const schema = Joi.object({
         orderItemId: Joi.number().required(),
-        driverCode: Joi.string().required()
+        driverCode: Joi.string().alphanum().required().max(20)
       })
 
       const { error } = await schema.validate(req.body)
@@ -51,9 +51,9 @@ const validateOrder = {
 
 
     } catch (error) {
-      res.status(400).send({
+      res.status(httpStatus.badRequest).send({
         error: true,
-        statusCode: errorCode.VALIDATION_ERROR,
+        errorCode: errorCode.VALIDATION_ERROR,
         message: error.message
       });
     }

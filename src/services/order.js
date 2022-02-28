@@ -1,6 +1,7 @@
 const {
   rdOrder, rdOrderItem
-} = require('../schemas');
+} = require('../schemas')
+const { httpStatus } = require('../configs/constant')
 const { Op } = require('sequelize')
 
 class Order {
@@ -35,6 +36,7 @@ class Order {
     await rdOrderItem.bulkCreate(payloadItems)
     return {
       success: true,
+      statusCode: httpStatus.ok,
       data: orderHeader,
       message: 'success create order'
     }
@@ -66,7 +68,7 @@ class Order {
     if (!findOrder) {
       return {
         succes: false,
-        errorCode: 404,
+        statusCode: httpStatus.notFound,
         message: 'ORDER_NOT_FOUND'
       }
     }
@@ -84,6 +86,7 @@ class Order {
 
     return {
       success: true,
+      statusCode: httpStatus.ok,
       data: result,
       message: 'success assigning orders'
     }
@@ -106,6 +109,7 @@ class Order {
     })
     return {
       success: true,
+      statusCode: httpStatus.ok,
       data: orders,
       message: 'success retrieve orders'
     }
@@ -172,6 +176,7 @@ class Order {
 
     return {
       success: true,
+      statusCode: httpStatus.ok,
       data: result,
       message: 'success retrieve orders group'
     }

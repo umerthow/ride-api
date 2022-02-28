@@ -28,12 +28,12 @@ const assignOrder = async (req, res, next) => {
 
     const Order = new OrderInstance()
     const result = await Order.assignOrder(orderId, body)
-    const { success, message, errorCode = 400 } = result
+    const { success, message, statusCode = 400,  } = result
     if (!success) {
       return res
-        .status(errorCode)
+        .status(statusCode)
         .json({
-          status: errorCode,
+          statusCode: statusCode,
           message
         })
     }
